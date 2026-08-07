@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyLink Crew Portal &middot; Sign in</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="login-shell">
+    <div class="login-card">
+      <div class="brand-mark">
+        <div class="brand-glyph">SL</div>
+        <div class="brand-text">SkyLink <span>Crew Portal</span></div>
+      </div>
+
+      <h1>Sign in</h1>
+      <p class="subtitle">Access your trip assignments and schedule.</p>
+
+      <div id="errorBanner" class="login-error" style="display:none;">
+        Incorrect username or password. Please try again.
+      </div>
+
+      <form method="post" action="/login">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" autocomplete="username" required autofocus>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn-primary">Sign in</button>
+      </form>
+
+      <div class="login-hint">
+        Demo crew logins (password <span class="mono">CrewDemo#2026</span> for all):<br>
+        <span class="mono">jmorrison</span> &middot; Captain &nbsp;|&nbsp;
+        <span class="mono">asingh</span> &middot; First Officer<br>
+        <span class="mono">kwilliams</span> &middot; Purser &nbsp;|&nbsp;
+        <span class="mono">rortega</span> &middot; Flight Attendant
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (new URLSearchParams(window.location.search).get('error') === 'true') {
+      document.getElementById('errorBanner').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyLink Crew Portal &middot; My Calendar</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="crew-badge">
+      <span class="brand-glyph">SL</span>
+      <div>
+        <div class="crew-badge-name" id="crewName">Loading&hellip;</div>
+        <div class="crew-badge-meta" id="crewMeta"></div>
+      </div>
+      <span class="crew-badge-role" id="crewRole"></span>
+    </div>
+    <form class="logout-form" method="post" action="/logout">
+      <button type="submit">Sign out</button>
+    </form>
+  </header>
+
+  <main class="main-content">
+    <div class="calendar-header">
+      <h2 id="monthLabel">&nbsp;</h2>
+      <div class="month-nav">
+        <button id="prevMonth" aria-label="Previous month">&larr;</button>
+        <button id="todayBtn">Today</button>
+        <button id="nextMonth" aria-label="Next month">&rarr;</button>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#F2A93B"></span> Assigned</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#2BB3A3"></span> Confirmed</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#7C8AA5"></span> Completed</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#D9534F"></span> Cancelled</span>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid">
+      <!-- Day-of-week headers and day cells are rendered by calendar.js -->
+    </div>
+  </main>
+
+  <script src="/js/calendar.js"></script>
+</body>
+</html>

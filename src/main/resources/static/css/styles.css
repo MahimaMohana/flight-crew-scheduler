@@ -1,0 +1,478 @@
+/* ==========================================================================
+   SkyLink Crew Portal - design tokens
+   Visual direction: night flight-deck instrument panel. Deep navy surfaces,
+   amber for "in progress / assigned" states (runway & cockpit-lighting
+   amber), teal for "confirmed" states. Flight data (numbers, times, IDs) is
+   always set in monospace, echoing an airport split-flap board.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-primary: #0B1E3D;
+  --bg-panel: #122A4E;
+  --bg-panel-raised: #1B3A63;
+  --bg-panel-hover: #204774;
+
+  --accent-amber: #F2A93B;
+  --accent-amber-dim: rgba(242, 169, 59, 0.16);
+  --accent-teal: #2BB3A3;
+  --accent-teal-dim: rgba(43, 179, 163, 0.16);
+  --accent-danger: #E0655F;
+  --accent-danger-dim: rgba(224, 101, 95, 0.16);
+  --accent-muted: #7C8AA5;
+  --accent-muted-dim: rgba(124, 138, 165, 0.16);
+
+  --text-primary: #EDEFF4;
+  --text-secondary: #B7C1D6;
+  --text-muted: #7C8AA5;
+
+  --border-subtle: rgba(237, 239, 244, 0.10);
+  --border-strong: rgba(237, 239, 244, 0.22);
+
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(242, 169, 59, 0.06), transparent 40%),
+    radial-gradient(circle at 85% 100%, rgba(43, 179, 163, 0.07), transparent 45%),
+    var(--bg-primary);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent-amber);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* --------------------------------------------------------------------------
+   Login page
+   -------------------------------------------------------------------------- */
+
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-amber), var(--accent-teal));
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.brand-glyph {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-amber);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+.brand-text span {
+  color: var(--accent-amber);
+}
+
+.login-card h1 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+
+.login-card p.subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0 0 28px;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  transition: border-color 0.15s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--accent-amber);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--accent-amber);
+  color: #1a1305;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--accent-teal);
+  outline-offset: 2px;
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.login-error {
+  background: var(--accent-danger-dim);
+  border: 1px solid var(--accent-danger);
+  color: #FFD9D6;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.login-hint {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-strong);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.login-hint .mono {
+  color: var(--text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Calendar page shell
+   -------------------------------------------------------------------------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(11, 30, 61, 0.7);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.crew-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.crew-badge-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--bg-primary);
+  background: var(--accent-amber);
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.crew-badge-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.crew-badge-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.logout-form button {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.logout-form button:hover {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
+}
+
+.main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.month-nav button {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.month-nav button:hover {
+  background: var(--bg-panel-hover);
+  border-color: var(--accent-amber);
+}
+
+.legend {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* --------------------------------------------------------------------------
+   Calendar grid + boarding-stub assignment chips (signature element)
+   -------------------------------------------------------------------------- */
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.dow-label {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.day-cell {
+  min-height: 96px;
+  background: rgba(237, 239, 244, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.day-cell.outside {
+  opacity: 0.35;
+}
+
+.day-cell.today {
+  border-color: var(--accent-amber);
+  background: var(--accent-amber-dim);
+}
+
+.day-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  align-self: flex-end;
+}
+
+.day-cell.today .day-number {
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+/* The boarding-stub chip: a torn/perforated left edge nods to a paper
+   boarding pass stub, reinforcing the flight-ops subject matter. */
+.assignment-chip {
+  position: relative;
+  padding: 5px 8px 5px 12px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.35;
+  color: #0B1E3D;
+  cursor: default;
+}
+
+.assignment-chip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-image: radial-gradient(circle, var(--bg-panel) 1.4px, transparent 1.6px);
+  background-size: 5px 7px;
+  background-repeat: repeat-y;
+  background-position: left center;
+  opacity: 0.55;
+}
+
+.assignment-chip .chip-trip {
+  font-weight: 600;
+  display: block;
+}
+
+.assignment-chip .chip-role {
+  display: block;
+  opacity: 0.75;
+  font-size: 10px;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  .topbar, .main-content {
+    padding: 16px;
+  }
+  .calendar-grid {
+    gap: 4px;
+    padding: 8px;
+  }
+  .day-cell {
+    min-height: 70px;
+    padding: 5px;
+  }
+  .dow-label {
+    font-size: 9px;
+  }
+  .assignment-chip {
+    font-size: 9px;
+  }
+}
