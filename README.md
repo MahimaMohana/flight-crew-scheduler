@@ -88,11 +88,11 @@ Tests cover the role-compatibility and overlap-detection business logic in
 JaCoCo generates `target/site/jacoco/jacoco.xml`, which is what both the
 Sonar Maven plugin and your local SonarQube IDE plugin read for coverage.
 
-## Sonar Way vs. "Southwest Way": running the two-profile demo
+## Sonar Way vs. "Aviation Way": running the two-profile demo
 
 **Why local, not SonarCloud:** SonarQube Cloud's Free plan only supports the
 built-in Sonar Way profile - custom quality profiles are a Team/Enterprise
-feature there. To show a custom "Southwest Way" profile next to Sonar Way
+feature there. To show a custom "Aviation Way" profile next to Sonar Way
 for free, run **SonarQube Community Build** locally instead. This also means
 the demo has zero dependency on conference wifi or on your company's
 corporate SonarQube instance - everything runs on your own laptop.
@@ -109,8 +109,8 @@ Then:
 
 1. Open `http://localhost:9000`, log in as `admin`/`admin`, and set a new password.
 2. **Create new project** &rarr; project key `flight-crew-scheduler` &rarr; **Generate a token** (save it - you'll pass it as `sonar.token`).
-3. **Quality Profiles** &rarr; find the built-in Java **Sonar way** profile &rarr; **Extend** &rarr; name the new profile `Southwest Way`. Extending (not copying) means it inherits everything from Sonar Way, so the "we build on the industry standard, plus our own bar" narrative is literally true.
-4. In `Southwest Way`, tighten a couple of parameters so the two profiles visibly diverge:
+3. **Quality Profiles** &rarr; find the built-in Java **Sonar way** profile &rarr; **Extend** &rarr; name the new profile `Aviation Way`. Extending (not copying) means it inherits everything from Sonar Way, so the "we build on the industry standard, plus our own bar" narrative is literally true.
+4. In `Aviation Way`, tighten a couple of parameters so the two profiles visibly diverge:
    - **Cognitive Complexity** (`java:S3776`) - lower the `Threshold` parameter from its default down to something aggressive, e.g. `4`.
    - **String literals should not be duplicated** (`java:S1192`) - lower the minimum-occurrences parameter if exposed.
 5. Run analysis against your local instance:
@@ -120,7 +120,7 @@ Then:
      -Dsonar.host.url=http://localhost:9000 \
      -Dsonar.token=<your local token>
    ```
-6. In the SonarQube UI, assign the project's Java quality profile to **Sonar way** first and note the findings, then reassign it to **Southwest Way** and re-run step 5 - `DemoSonarFindings.seniorityBand()` (see below) is calibrated to be clean under Sonar Way and flagged under Southwest Way once the complexity threshold is tightened, giving you a provable, live "same file, two profiles, two results."
+6. In the SonarQube UI, assign the project's Java quality profile to **Sonar way** first and note the findings, then reassign it to **Aviation Way** and re-run step 5 - `DemoSonarFindings.seniorityBand()` (see below) is calibrated to be clean under Sonar Way and flagged under Aviation Way once the complexity threshold is tightened, giving you a provable, live "same file, two profiles, two results."
 
 ### Connected Mode in VS Code
 
@@ -142,7 +142,7 @@ updates with the new findings under the new profile.
 - **`DemoSonarFindings.java`** (`service` package) - deliberately unused at
   runtime, carrying four labeled findings: three standard Sonar Way findings
   (cognitive complexity, duplicated string literal, unused local variable),
-  plus `seniorityBand()`, calibrated to only fail once Southwest Way's
+  plus `seniorityBand()`, calibrated to only fail once Aviation Way's
   Cognitive Complexity threshold is tightened. Safe to delete once it's
   served its purpose - nothing else depends on it.
 - **CSRF disabled in `SecurityConfig`** - flagged as security hotspot
@@ -159,7 +159,7 @@ not a codebase riddled with bugs.
 `.github/workflows/build-and-sonar.yml` is set up to run against SonarCloud
 if you want continuous analysis on the public GitHub repo afterward. Note
 the Free plan there only offers the Sonar Way profile (see above) - the
-Southwest Way comparison is a local-only demo unless you upgrade to a paid
+Aviation Way comparison is a local-only demo unless you upgrade to a paid
 SonarCloud plan. To wire it up: create a SonarCloud org, add repo secret
 `SONAR_TOKEN` and repo variables `SONAR_PROJECT_KEY` / `SONAR_ORGANIZATION`.
 
