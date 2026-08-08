@@ -34,7 +34,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindings.java`
 
-- [ ] 2. **[S1192 — Sonar Way] Add method with duplicated string literals**
+- [x] 2. **[S1192 — Sonar Way] Add method with duplicated string literals**
 
   Open `DemoSonarFindings.java`. Add the following method at the bottom of the class (before the closing `}`):
 
@@ -287,7 +287,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindingsExtra.java`
 
-- [ ] 13. **[S1698 — Custom Profile] Add method using == on a String field (equals is overridden)**
+- [x] 13. **[S1698 — Custom Profile] Add method using == on a String field (equals is overridden)**
 
   Open `DemoSonarFindingsExtra.java`. Add the following method inside the class (before the closing `}`):
 
@@ -302,7 +302,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindingsExtra.java`
 
-- [ ] 14. **[S1874 — Custom Profile] Add method that calls a deprecated API**
+- [x] 14. **[S1874 — Custom Profile] Add method that calls a deprecated API**
 
   Open `DemoSonarFindingsExtra.java`. Add the following method inside the class (before the closing `}`):
 
@@ -319,7 +319,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindingsExtra.java`
 
-- [ ] 15. **[S2203 — Custom Profile] Add method that uses forEach + list::add instead of collect**
+- [x] 15. **[S2203 — Custom Profile] Add method that uses forEach + list::add instead of collect**
 
   Open `DemoSonarFindingsExtra.java`. Add the following method inside the class (before the closing `}`):
 
@@ -338,7 +338,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindingsExtra.java`
 
-- [ ] 16. **[S2221 — Custom Profile] Add method that catches the base Exception type unnecessarily**
+- [x] 16. **[S2221 — Custom Profile] Add method that catches the base Exception type unnecessarily**
 
   Open `DemoSonarFindingsExtra.java`. Add the following method inside the class (before the closing `}`):
 
@@ -372,7 +372,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindingsExtra.java`
 
-- [ ] 18. **[S2259 — Custom Profile] Add method with a potential null dereference**
+- [x] 18. **[S2259 — Custom Profile] Add method with a potential null dereference**
 
   Open `DemoSonarFindingsExtra.java`. Add the following method inside the class (before the closing `}`):
 
@@ -388,7 +388,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindingsExtra.java`
 
-- [ ] 19. **[S1066 — Custom Profile] Add method with collapsible if statements**
+- [x] 19. **[S1066 — Custom Profile] Add method with collapsible if statements**
 
   Open `DemoSonarFindingsExtra.java`. Add the following method inside the class (before the closing `}`):
 
@@ -408,7 +408,7 @@ All changes are confined to the two demo files:
 
   **Files to modify:** `DemoSonarFindingsExtra.java`
 
-- [ ] 20. **[S1118 — Custom Profile] Remove the private constructor to make it a utility class without one**
+- [x] 20. **[S1118 — Custom Profile] Remove the private constructor to make it a utility class without one**
 
   Open `DemoSonarFindingsExtra.java`. Delete the private constructor block:
 

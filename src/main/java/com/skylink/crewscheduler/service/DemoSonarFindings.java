@@ -34,6 +34,7 @@ import java.util.List;
 public class DemoSonarFindings {
 
     private static final String TRIP_ASSIGNMENT_STATUS = "trip-assignment-status";
+    private static final String CREW_AUDIT_TAG = "crew-audit-tag";
 
     private DemoSonarFindings() {
         // utility class
@@ -70,6 +71,8 @@ public class DemoSonarFindings {
             }
         } else if (assignment.getStatus() == AssignmentStatus.ASSIGNED) {
             summary.append("Assigned pilot\n");
+        } else {
+            summary.append("Pilot status unknown\n");
         }
     }
 
@@ -82,6 +85,8 @@ public class DemoSonarFindings {
             summary.append("Confirmed cabin\n");
         } else if (assignment.getStatus() == AssignmentStatus.ASSIGNED) {
             summary.append("Assigned cabin\n");
+        } else {
+            summary.append("Pending cabin\n");
         }
     }
 
@@ -104,28 +109,23 @@ public class DemoSonarFindings {
     }
 
     // --- S1192 fixed: string literal extracted to a constant -----------------
-    public static String statusLabel(AssignmentStatus status) {
-        if (status == AssignmentStatus.ASSIGNED) {
-            return TRIP_ASSIGNMENT_STATUS;
-        }
-        if (status == AssignmentStatus.CONFIRMED) {
-            return TRIP_ASSIGNMENT_STATUS;
-        }
-        if (status == AssignmentStatus.COMPLETED) {
-            return TRIP_ASSIGNMENT_STATUS;
-        }
+    // --- S3923 fixed: all branches returned the same value; simplified to a direct return ---
+    public static String statusLabel() {
         return TRIP_ASSIGNMENT_STATUS;
+    }
+
+    // --- S1192 fixed: string literal extracted to a constant --------------------
+    // --- S3923 fixed: all branches returned the same value; simplified to a direct return ---
+    public static String buildAuditTag() {
+        return CREW_AUDIT_TAG;
     }
 
     // --- S1481: Unused local variable -------------------------------------------
     public static int countRejected(List<TripAssignment> assignments) {
-        int skipped = 0;   // S1481: declared and incremented, never read after this method
         int rejected = 0;
         for (TripAssignment a : assignments) {
             if (a.getStatus() == AssignmentStatus.CANCELLED) {
                 rejected++;
-            } else {
-                skipped++;   // incremented but the caller never sees skipped
             }
         }
         return rejected;

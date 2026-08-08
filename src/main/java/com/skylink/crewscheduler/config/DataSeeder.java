@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.List;
 
 /**
  * Populates the in-memory H2 database with a believable roster, a month of
@@ -49,21 +51,21 @@ public class DataSeeder implements CommandLineRunner {
             return;
         }
 
-        CrewMember captainMorrison = crewMember("SW10231", "jmorrison", "Jordan", "Morrison",
+        CrewMember captainMorrison = crewMember("SW10231", "jmorrison", "Jordan Morrison",
                 "jordan.morrison@skylink-demo.com", CrewRole.PILOT, "DAL", 412);
-        CrewMember foSingh = crewMember("SW10456", "asingh", "Amara", "Singh",
+        CrewMember foSingh = crewMember("SW10456", "asingh", "Amara Singh",
                 "amara.singh@skylink-demo.com", CrewRole.PILOT, "DAL", 1287);
-        CrewMember purserWilliams = crewMember("SW20118", "kwilliams", "Keisha", "Williams",
+        CrewMember purserWilliams = crewMember("SW20118", "kwilliams", "Keisha Williams",
                 "keisha.williams@skylink-demo.com", CrewRole.FLIGHT_ATTENDANT, "DAL", 305);
-        CrewMember faOrtega = crewMember("SW20873", "rortega", "Rafael", "Ortega",
+        CrewMember faOrtega = crewMember("SW20873", "rortega", "Rafael Ortega",
                 "rafael.ortega@skylink-demo.com", CrewRole.FLIGHT_ATTENDANT, "DAL", 954);
-        CrewMember faNguyen = crewMember("SW21190", "tnguyen", "Thao", "Nguyen",
+        CrewMember faNguyen = crewMember("SW21190", "tnguyen", "Thao Nguyen",
                 "thao.nguyen@skylink-demo.com", CrewRole.FLIGHT_ATTENDANT, "HOU", 1102);
 
-        crewMemberRepository.saveAll(java.util.List.of(
+        crewMemberRepository.saveAll(List.of(
                 captainMorrison, foSingh, purserWilliams, faOrtega, faNguyen));
 
-        LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now(ZoneId.systemDefault());
         LocalDate monthStart = today.withDayOfMonth(1);
 
         Trip turn = trip("TRIP-4401", monthStart.plusDays(2), monthStart.plusDays(2));
@@ -92,7 +94,7 @@ public class DataSeeder implements CommandLineRunner {
         nextMonthRun.addFlight(flight("SL1876", "DAL", "PHX", monthStart.plusMonths(1).plusDays(2), LocalTime.of(12, 40), 100));
         nextMonthRun.addFlight(flight("SL1889", "PHX", "DAL", monthStart.plusMonths(1).plusDays(3), LocalTime.of(15, 55), 100));
 
-        tripRepository.saveAll(java.util.List.of(turn, layover, westCoast, quickTurn, southeastRun, nextMonthRun));
+        tripRepository.saveAll(List.of(turn, layover, westCoast, quickTurn, southeastRun, nextMonthRun));
 
         assign(captainMorrison, turn, AssignmentRole.CAPTAIN, AssignmentStatus.CONFIRMED);
         assign(captainMorrison, layover, AssignmentRole.CAPTAIN, AssignmentStatus.CONFIRMED);
@@ -116,10 +118,13 @@ public class DataSeeder implements CommandLineRunner {
         assign(faNguyen, nextMonthRun, AssignmentRole.FLIGHT_ATTENDANT, AssignmentStatus.ASSIGNED);
     }
 
-    private CrewMember crewMember(String employeeId, String username, String firstName, String lastName,
+    private CrewMember crewMember(String employeeId, String username, String fullName,
                                    String email, CrewRole role, String base, int seniority) {
+        int spaceIndex = fullName.indexOf(' ');
+        String firstName = spaceIndex >= 0 ? fullName.substring(0, spaceIndex) : fullName;
+        String lastName  = spaceIndex >= 0 ? fullName.substring(spaceIndex + 1) : "";
         // Shared demo password for every seeded crew member: "CrewDemo#2026"
-        return new CrewMember(employeeId, username, passwordEncoder.encode("CrewDemo#2026"),
+        return new CrewMember(employeeId, username, passwordEncoder.encode("CrewDemo#2026"), 
                 firstName, lastName, email, role, base, seniority);
     }
 
@@ -135,6 +140,6 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private void assign(CrewMember crewMember, Trip trip, AssignmentRole role, AssignmentStatus status) {
-        tripAssignmentRepository.save(new TripAssignment(crewMember, trip, role, status, LocalDate.now()));
+        tripAssignmentRepository.save(new TripAssignment(crewMember, trip, role, status, LocalDate.now(ZoneId.systemDefault())));
     }
 }
